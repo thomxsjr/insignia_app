@@ -1,37 +1,45 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import React, { useEffect } from 'react'
+import { SplashScreen, Stack } from 'expo-router'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+const RootLayout = () => {
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    const [fontsLoaded, error] = useFonts({
+        "Space-Mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
+        "Helmet": require('../assets/fonts/Helmet-Regular.ttf')
+    });
+
+    useEffect(() => {
+        if (error) throw error;
+        if (fontsLoaded) SplashScreen.hideAsync();
+    }, [fontsLoaded, error]);
+
+    if (!fontsLoaded) {
+        return null;
     }
-  }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
+    if (!fontsLoaded && !error) {
+        return null;
+    }
 
+    
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+    <SafeAreaProvider>
+        <Stack>
+            <Stack.Screen 
+            name='index' 
+            options={{headerShown: false}}
+        />
+        <Stack.Screen 
+            name='(tabs)' 
+            options={{headerShown: false}}
+        />
+        </Stack>
+    </SafeAreaProvider>
+  )
 }
+
+export default RootLayout
