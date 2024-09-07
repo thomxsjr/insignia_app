@@ -42,7 +42,7 @@ const VoiceRecorder = () => {
     }
 
   return (
-    <View>
+    <View  className = 'border border-white'>
         <Text className='text-md text-white'>{recognizedText}</Text>
         <Text className='text-md text-white'>{error}</Text>
         <CustomButton 
