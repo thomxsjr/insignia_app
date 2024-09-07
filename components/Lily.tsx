@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react"
 import { useGLTF, useTexture, useAnimations } from "@react-three/drei/native"
-import { useGraph } from "@react-three/fiber"
+import { useGraph } from "@react-three/fiber/native"
 import { a, useSpring } from "@react-spring/three"
 import { SkeletonUtils } from "three-stdlib"
 

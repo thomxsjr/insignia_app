@@ -1,11 +1,8 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React, { Suspense } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import VoiceRecorder from '../../../components/VoiceRecorder'
 import Lily from '@/components/Lily.tsx'
 import { Canvas } from '@react-three/fiber/native'
-import { OrbitControls } from '@react-three/drei/native'
-// import { OrbitControls } from '@react-three/drei/native'
 
 const SpeechToISL = () => {
   return (
@@ -31,7 +28,6 @@ const SpeechToISL = () => {
           }
         }
       }} shadows camera={{ fov: 50 }}>
-    <OrbitControls />
       <ambientLight />
       <directionalLight position={[-5, 5, 5]} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
       <group position={[0, -1, 0]}>
